@@ -1,7 +1,4 @@
 {
   "port": 8080,
-  "folders": {
-  	"uploadFolder": "./upload", 
-  	"trashFolder": "./remove"
-  }
+  "trashFolder": "./remove"
 }

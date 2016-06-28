@@ -24,11 +24,11 @@ function uploadFile(app, settings) {
   utils.checkDirectorySync('./temp');
   
   //Check if it is send the file name in the header 
-  app.use(function(req, res, next) {
+  app.use(function(req, res, next) {console.log(req.method);
     //TODO Ask David Foster if we can modify the script meanwhile we check header and look for filename 
     var fileName = req.headers.filename;
     //Check if file name is sent 
-    if(!fileName) {
+    if(!fileName && req.method === 'POST') {
       res.status(500);
       res.end("Please add file name in the header \n");
     } else {

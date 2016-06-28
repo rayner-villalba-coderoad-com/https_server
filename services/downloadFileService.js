@@ -7,7 +7,7 @@ function download(app, settings) {
 
   	var fileName   = req.params['file'];
     var sourcePath = path.join(req.params['ediPath'], fileName);
-    var destPath   = path.join(settings.folders.trashFolder, fileName);
+    var destPath   = path.join(settings.trashFolder, fileName);
     
     var fileCallback = function() {
       fs.unlink(sourceFilePath, function(err) {
