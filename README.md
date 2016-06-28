@@ -77,3 +77,18 @@ Let's run the following command:
 ```bash
   node app.js
 ``` 
+
+### Test with Curl 
+You can test upload and download with the following command lines: 
+
+**Upload a File**
+
+```bash
+  curl http://localhost:8080/upload --data-binary @example.txt -H "filename:example.txt"
+```
+
+**Download a File**
+
+```bash
+  curl -O "http://localhost:8080/upload/example.txt"
+```
