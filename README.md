@@ -12,7 +12,7 @@ Let's clone and setting up the project
 ```bash
   git clone git@github.com:rayner-villalba-coderoad-com/https_server.git
   cd https_server
-  npm init 
+  npm install
 ```  
 ### Add HTTPS certifications
 In order to add https certifications you have to edit **sslConfig.js**  that is inside of _config_ folder. This file should look like this: 
