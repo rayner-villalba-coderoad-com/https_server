@@ -13,7 +13,7 @@ function addCertifies() {
   if (existsKeys && existsCertificate) {    
     httpsCertificate = {
       key: fs.readFileSync(sslConfig.keyPath),
-      //ca: fs.readFileSync(sslConfig.caPath),
+      ca: fs.readFileSync(sslConfig.caPath),
       cert: fs.readFileSync(sslConfig.certPath),
       requestCert: true, // require client send certificate
       rejectUnauthorized: true 

@@ -45,7 +45,7 @@ var fs   = require('fs');
 module.exports = {
   caPath: 'C://https_server/my-root-ca.crt.pem', 
   keyPath: 'C://https_server/my-server.key.pem',
-  certPath: C://https_server/my-server.crt.pem'
+  certPath: 'C://https_server/my-server.crt.pem'
 };
 ```
 
@@ -55,21 +55,24 @@ If you want to change some default configurations of the project, you can edit *
 ```javascript
  {
   "port": 8080,
+  "uploadBaseFolder":"./upload",
   "trashFolder": "./remove"
 }
 ```
-You can change change the port and trashFolder:  
+You can change change the port, uploadBaseFolder and trashFolder:
 
 ```javascript
  {
   "port": 6666,
-  "trashFolder": "C://old_files"
+  "uploadBaseFolder":"C:/EDI_FILES",
+  "trashFolder": "C:/old_files"
 }
 ```
  
 **NOTE** 
   * port: contains the port that node application will run
-  * trashFolder: contains the directory will contain the files that were downloaded
+  * uploadBaseFolder: contains the base directory where the files will be uploaded
+  * trashFolder: contains the directory where the file will be moved after downloading it
 
 ### Start the Project
 Let's run the following command:

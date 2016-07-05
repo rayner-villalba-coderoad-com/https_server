@@ -1,4 +1,4 @@
-var fs    = require('fs');;
+var fs    = require('fs');
 var path  = require('path');
 var utils = require('./utils.js');
 
@@ -6,20 +6,15 @@ function download(app, settings) {
   app.get('/:ediPath/:file', function(req, res) {
 
   	var fileName   = req.params['file'];
-    var sourcePath = path.join(req.params['ediPath'], fileName);
-    var destPath   = path.join(settings.trashFolder, fileName);
-    
-    var fileCallback = function() {
-      fs.unlink(sourceFilePath, function(err) {
-        if(err) throw err;
-        console.log('Your file has been moved');
-      });
-    };
 
-    var failCallback = function () {
-       res.status(500);
-       res.end("Error");
-    };
+    //Set base upload directory
+    var uploadDir  = settings.uploadBaseFolder;
+    var sourcePath = path.join(uploadDir, req.params['ediPath'], fileName);
+
+    //Check if the folder exists if it doesn't the folder will be created
+    utils.checkDirectorySync(settings.trashFolder);
+
+    var destPath   = path.join(settings.trashFolder, fileName);
 
     var downloadCallback = function(err) {
       if(err) {

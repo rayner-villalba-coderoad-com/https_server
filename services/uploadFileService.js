@@ -1,24 +1,12 @@
 var fs     = require('fs');
 var path   = require('path');
-var multer = require('multer');
 var utils  = require('./utils.js');
-/*
- * checkDirectorySync()  check if the current directory exists
- * if it  does not, it will create a folder   
- * @param {String} directory
- */
-function checkDirectorySync(directory) {  
-  try {
-    fs.statSync(directory);
-  } catch(e) {
-    fs.mkdirSync(directory);
-  }
-}
 
 function uploadFile(app, settings) { 
   
-  //utils.checkDirectorySync(settings.folders.uploadFolder);	
-  //var destFolder = settings.folders.uploadFolder;
+  utils.checkDirectorySync(settings.uploadBaseFolder);
+  //Set the base directory
+  var uploadFolder = settings.uploadBaseFolder;
   
   //Create a temp folder if does not exist
   utils.checkDirectorySync('./temp');
@@ -37,12 +25,15 @@ function uploadFile(app, settings) {
   });
 
   app.post('/:ediPath', function(req, res) {
+
+    var ediFolder = path.join(uploadFolder, req.params['ediPath']);
+
+
     //Check if the folder exists if it doesn't the folder will be created
-    utils.checkDirectorySync(req.params['ediPath']);  
-    
-    //var destFolder = req.params['ediPath'];
+    utils.checkDirectorySync(ediFolder);
+
     var destFolderTemp = './temp';
-    var destFolder = req.params['ediPath'];
+    var destFolder = ediFolder;
     var tempPath = destFolderTemp;
     //TODO remove this line 
     console.log(req.headers);
@@ -55,15 +46,7 @@ function uploadFile(app, settings) {
     destFolderTemp = path.join(destFolderTemp, fileName);
     
     var existsFile = utils.checkFileExists(destFolder);
-    
-    var removeFile = function (filePath) {
-      try {
-        fs.unlink(filePath);
-        console.log('File"' + filePath + '" removed!');     
-      } catch (err) {
-        console.log('error');
-      }
-    };
+
     //TODO ask David how to handle files that were updated or it has same file name 
     //meanwhile check it won't be possible to upload the same file 
     if(!existsFile) {
