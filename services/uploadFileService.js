@@ -35,9 +35,9 @@ function uploadFile(app, settings) {
     var destFolderTemp = './temp';
     var destFolder = ediFolder;
     var tempPath = destFolderTemp;
-    //TODO remove this line 
-    console.log(req.headers);
-    //console.log(req.files);
+    //TODO remove this line
+    //console.log(req.headers);
+
   	
     //TODO Ask David Foster if we can modify the script meanwhile we check header and look for filename 
     var fileName = req.headers['filename'];
@@ -45,11 +45,11 @@ function uploadFile(app, settings) {
     destFolder = path.join(destFolder, fileName);
     destFolderTemp = path.join(destFolderTemp, fileName);
     
-    var existsFile = utils.checkFileExists(destFolder);
+    //var existsFile = utils.checkFileExists(destFolder);
 
     //TODO ask David how to handle files that were updated or it has same file name 
     //meanwhile check it won't be possible to upload the same file 
-    if(!existsFile) {
+    //if(!existsFile) {
       var destinationFile = fs.createWriteStream(destFolderTemp); 
       
       destinationFile.on('error', function(err) {
@@ -97,11 +97,11 @@ function uploadFile(app, settings) {
       req.on("close", function(err) {
         console.log("request closed...");
       });
-    } else {
-      destFolder = tempPath;
-      res.status(500);
-      res.end("You can not upload this File, because this file has been uploaded \n");
-    }
+    //} else {
+    //  destFolder = tempPath;
+    //  res.status(500);
+    //  res.end("You can not upload this File, because this file has been uploaded \n");
+    //}
   });
 }
 
